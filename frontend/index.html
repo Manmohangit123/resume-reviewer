@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Reviewer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>📄 Resume Reviewer</h1>
+      <p>Upload your resume and get instant AI feedback</p>
+    </div>
+
+    <div class="upload-box" id="uploadBox">
+      <input type="file" id="fileInput" accept=".pdf" hidden />
+      <div id="uploadPrompt">
+        <div class="upload-icon">⬆️</div>
+        <p>Drag & drop your PDF here</p>
+        <button onclick="document.getElementById('fileInput').click()">Browse File</button>
+      </div>
+      <div class="file-info" id="fileInfo" style="display:none">
+        <span id="fileName"></span>
+        <button id="removeFile">✕ Remove</button>
+      </div>
+    </div>
+
+    <div class="error" id="errorBox" style="display:none"></div>
+
+    <button class="review-btn" id="reviewBtn" disabled>
+      Review My Resume
+    </button>
+
+    <div class="loader" id="loader" style="display:none">
+      <div class="spinner"></div>
+      <p>Analyzing your resume...</p>
+    </div>
+
+    <div class="results" id="results" style="display:none">
+      <div class="score-card">
+        <div class="score-circle" id="scoreCircle"></div>
+        <div class="score-text">
+          <h3>Overall Score</h3>
+          <p id="summaryText"></p>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card green">
+          <h4>✅ Strengths</h4>
+          <ul id="strengthsList"></ul>
+        </div>
+        <div class="card red">
+          <h4>⚠️ Improvements</h4>
+          <ul id="improvementsList"></ul>
+        </div>
+        <div class="card yellow full">
+          <h4>❌ Missing Elements</h4>
+          <ul id="missingList"></ul>
+        </div>
+        <div class="card gray full">
+          <h4>💡 Tips</h4>
+          <ul id="tipsList"></ul>
+        </div>
+      </div>
+
+      <button class="review-btn" id="resetBtn">Review Another Resume</button>
+    </div>
+  </div>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
