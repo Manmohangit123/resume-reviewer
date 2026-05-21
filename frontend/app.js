@@ -125,7 +125,6 @@ function fillList(id, items) {
     ul.appendChild(li);
   });
 }
-
 function showError(msg) {
   const el = document.getElementById('errorBox');
   el.textContent = msg;

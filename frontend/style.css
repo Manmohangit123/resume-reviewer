@@ -162,10 +162,10 @@ body {
 .card li { font-size: 0.88rem; color: #444; line-height: 1.5; padding-left: 1rem; position: relative; }
 .card li::before { content: '–'; position: absolute; left: 0; color: #999; }
 
-.card.green { border-left: 4px solid #16a34a; }
-.card.red   { border-left: 4px solid #dc2626; }
-.card.yellow{ border-left: 4px solid #d97706; }
-.card.gray  { border-left: 4px solid #6b7280; }
+.card.green { border-left: 4px solid #16a34a; border-right: 4px solid #16a34a; }
+.card.red   { border-left: 4px solid #dc2626; border-right: 4px solid #dc2626; }
+.card.yellow{ border-left: 4px solid #d97706; border-right: 4px solid #d97706; }
+.card.gray  { border-left: 4px solid #6b7280; border-right: 4px solid #6b7280; }
 
 @media (max-width: 560px) {
   .cards-grid { grid-template-columns: 1fr; }
