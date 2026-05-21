@@ -2,15 +2,7 @@
 
 <div align="center">
 
-![Resume Reviewer Banner](https://img.shields.io/badge/Resume-Reviewer-7c6aff?style=for-the-badge&logo=files&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![OpenRouter](https://img.shields.io/badge/OpenRouter-AI-ff6b6b?style=for-the-badge&logo=openai&logoColor=white)
-
-**An intelligent resume analysis tool powered by AI that gives instant, detailed feedback on your resume.**
-
-[🚀 Live Demo](#) • [📸 Screenshots](#screenshots) • [⚙️ Installation](#installation) • [🛠️ Tech Stack](#tech-stack)
+[🛠️ Tech Stack](#tech-stack)
 
 </div>
 
@@ -32,6 +24,8 @@
 ## 📸 Screenshots
 
 > Upload your resume PDF and get instant AI-powered feedback with a beautiful dark UI.
+> <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/7a3dd552-ffe5-4606-986c-e35579f90e18" />
+
 
 | Upload Screen | Results Screen |
 |--------------|---------------|
