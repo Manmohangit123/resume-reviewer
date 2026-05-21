@@ -1,19 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-console.log('ENV PATH:', path.resolve('.env'));
-console.log('FILE EXISTS:', fs.existsSync('.env'));
-require('dotenv').config({ path: 'C:\\Users\\Lenovo\\OneDrive\\Desktop\\resumereview\\backend\\.env' });
-console.log('OPENROUTER KEY:', process.env.OPENROUTER_API_KEY);
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '5mb' }));
+
 app.post('/review', async (req, res) => {
   const { resumeText } = req.body;
+
   if (!resumeText || resumeText.length < 50) {
     return res.status(400).json({ error: 'Resume text is too short or missing.' });
   }
+
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
@@ -22,7 +21,7 @@ app.post('/review', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
- model: 'openrouter/free',
+        model: 'openrouter/auto',
         messages: [
           {
             role: 'user',
@@ -33,7 +32,8 @@ app.post('/review', async (req, res) => {
   "strengths": ["<point>", "<point>", "<point>"],
   "improvements": ["<point>", "<point>", "<point>"],
   "missing": ["<missing element>", "<missing element>"],
-  "tips": ["<formatting/tone tip>", "<tip>"]
+  "tips": ["<formatting/tone tip>", "<tip>"],
+  "formatting": ["<formatting issue>", "<formatting issue>"]
 }
 
 Resume:
@@ -47,10 +47,12 @@ ${resumeText.substring(0, 4000)}`
       const err = await response.json();
       throw new Error(err.error?.message || 'OpenRouter error: ' + response.status);
     }
+
     const data = await response.json();
     const raw = data.choices[0].message.content.trim();
     const match = raw.match(/\{[\s\S]*\}/);
     if (!match) return res.status(500).json({ error: 'Could not parse AI response.' });
+
     const parsed = JSON.parse(match[0]);
     res.json(parsed);
 
@@ -60,6 +62,7 @@ ${resumeText.substring(0, 4000)}`
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on http://localhost:${process.env.PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
