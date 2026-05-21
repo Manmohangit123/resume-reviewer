@@ -1,5 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000/review';
-
+const BACKEND_URL = 'https://resume-reviewer-oy60.onrender.com/review';
 let selectedFile = null;
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
