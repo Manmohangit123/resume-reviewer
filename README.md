@@ -2,7 +2,10 @@
 
 <div align="center">
 
-[🛠️ Tech Stack](#tech-stack)
+
+🌐 Live App: https://manmohangit123.github.io/resume-reviewer
+
+💻 Code: https://github.com/Manmohangit123/resume-reviewer
 
 </div>
 
