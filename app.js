@@ -93,7 +93,7 @@ reviewBtn.addEventListener('click', async () => {
     const data = await response.json();
     showResults(data);
 
-  } catch (err) {
+  } catch (err) { 
     showError(err.message || 'Something went wrong. Please try again.');
     reviewBtn.disabled = false;
   } finally {
@@ -101,7 +101,6 @@ reviewBtn.addEventListener('click', async () => {
   }
 });
 
-// --- Display Results ---
 function showResults(data) {
   document.getElementById('scoreCircle').textContent = data.score + '/10';
   document.getElementById('summaryText').textContent = data.summary;
