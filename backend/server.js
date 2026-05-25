@@ -29,7 +29,7 @@ app.post('/review', async (req, res) => {
         messages: [
           {
             role: 'user',
-            content: `You are an expert resume reviewer. Analyze the resume below and return ONLY raw JSON (no markdown, no backticks, no explanation):
+content: `You are an expert resume reviewer. Analyze the resume below and return ONLY raw JSON (no markdown, no backticks, no explanation):
 {
   "score": <number 1-10>,
   "summary": "<2-3 sentence overall assessment>",
@@ -37,9 +37,15 @@ app.post('/review', async (req, res) => {
   "improvements": ["<point>", "<point>", "<point>"],
   "missing": ["<missing element>", "<missing element>"],
   "tips": ["<formatting/tone tip>", "<tip>"],
-  "formatting": ["<formatting issue>", "<formatting issue>"]
+  "formatting": ["<formatting issue>", "<formatting issue>"],
+  "job_recommendations": [
+    {"title": "<job title>", "reason": "<why this job fits>"},
+    {"title": "<job title>", "reason": "<why this job fits>"},
+    {"title": "<job title>", "reason": "<why this job fits>"},
+    {"title": "<job title>", "reason": "<why this job fits>"},
+    {"title": "<job title>", "reason": "<why this job fits>"}
+  ]
 }
-
 Resume:
 ${resumeText.substring(0, 4000)}`
           }

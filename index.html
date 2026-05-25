@@ -354,7 +354,43 @@
       box-shadow: var(--glow);
       transition: transform 0.3s, box-shadow 0.3s;
     }
+.job-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
 
+@media (max-width: 580px) {
+  .job-grid { grid-template-columns: 1fr; }
+}
+
+.job-item {
+  background: var(--surface2);
+  border: 1px solid rgba(124,106,255,0.2);
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.job-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(124,106,255,0.15);
+}
+
+.job-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.job-reason {
+  font-size: 0.82rem;
+  color: var(--ink2);
+  line-height: 1.5;
+  font-weight: 400;
+}
     .score-banner:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 48px rgba(124,106,255,0.2);
@@ -809,8 +845,7 @@
     }, 100);
 
     document.getElementById('summaryText').textContent = data.summary || '';
-
-    const sections = [
+const sections = [
   { title: 'Strengths', emoji: '✅', cls: 'green', items: data.strengths },
   { title: 'Areas to Improve', emoji: '⚠️', cls: 'red', items: data.improvements },
   { title: 'Missing Elements', emoji: '❌', cls: 'orange', items: data.missing, full: true },
@@ -818,6 +853,28 @@
   { title: 'Formatting Issues', emoji: '📝', cls: 'red', items: data.formatting, full: true },
 ];
 
+// Job Recommendations Card
+if (data.job_recommendations && data.job_recommendations.length) {
+  const jobCard = document.createElement('div');
+  jobCard.className = 'card full';
+  jobCard.style.borderColor = 'rgba(124,106,255,0.4)';
+  jobCard.style.animationDelay = '0.5s';
+  jobCard.innerHTML = `
+    <div class="card-head">
+      <span class="card-emoji">🎯</span>
+      <span class="card-title" style="color:#a78bff">Job Recommendations</span>
+    </div>
+    <div class="job-grid">
+      ${data.job_recommendations.map(job => `
+        <div class="job-item">
+          <div class="job-title">💼 ${job.title}</div>
+          <div class="job-reason">${job.reason}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  grid.appendChild(jobCard);
+}
     const grid = document.getElementById('cardsGrid');
     grid.innerHTML = '';
     sections.forEach((sec, i) => {
