@@ -853,6 +853,24 @@ const sections = [
   { title: 'Formatting Issues', emoji: '📝', cls: 'red', items: data.formatting, full: true },
 ];
 
+const grid = document.getElementById('cardsGrid');
+grid.innerHTML = '';
+
+sections.forEach((sec, i) => {
+  if (!sec.items?.length) return;
+  const card = document.createElement('div');
+  card.className = `card ${sec.cls}${sec.full ? ' full' : ''}`;
+  card.style.animationDelay = (i * 0.1 + 0.1) + 's';
+  card.innerHTML = `
+    <div class="card-head">
+      <span class="card-emoji">${sec.emoji}</span>
+      <span class="card-title">${sec.title}</span>
+    </div>
+    <ul>${sec.items.map(i => `<li>${i}</li>`).join('')}</ul>
+  `;
+  grid.appendChild(card);
+});
+
 // Job Recommendations Card
 if (data.job_recommendations && data.job_recommendations.length) {
   const jobCard = document.createElement('div');
@@ -875,26 +893,28 @@ if (data.job_recommendations && data.job_recommendations.length) {
   `;
   grid.appendChild(jobCard);
 }
-    const grid = document.getElementById('cardsGrid');
-    grid.innerHTML = '';
-    sections.forEach((sec, i) => {
-      if (!sec.items?.length) return;
-      const card = document.createElement('div');
-      card.className = `card ${sec.cls}${sec.full ? ' full' : ''}`;
-      card.style.animationDelay = (i * 0.1 + 0.1) + 's';
-      card.innerHTML = `
-        <div class="card-head">
-          <span class="card-emoji">${sec.emoji}</span>
-          <span class="card-title">${sec.title}</span>
-        </div>
-        <ul>${sec.items.map(i => `<li>${i}</li>`).join('')}</ul>
-      `;
-      grid.appendChild(card);
-    });
 
-    results.classList.add('show');
-    revBtn.disabled = false;
-  }
+results.classList.add('show');
+revBtn.disabled = false;
+  jobCard.className = 'card full';
+  jobCard.style.borderColor = 'rgba(124,106,255,0.4)';
+  jobCard.style.animationDelay = '0.5s';
+  jobCard.innerHTML = `
+    <div class="card-head">
+      <span class="card-emoji">🎯</span>
+      <span class="card-title" style="color:#a78bff">Job Recommendations</span>
+    </div>
+    <div class="job-grid">
+      ${data.job_recommendations.map(job => `
+        <div class="job-item">
+          <div class="job-title">💼 ${job.title}</div>
+          <div class="job-reason">${job.reason}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  grid.appendChild(jobCard);
+}
 </script>
 </body>
 </html>
