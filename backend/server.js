@@ -39,11 +39,9 @@ content: `You are an expert resume reviewer. Analyze the resume below and return
   "tips": ["<formatting/tone tip>", "<tip>"],
   "formatting": ["<formatting issue>", "<formatting issue>"],
   "job_recommendations": [
-    {"title": "<job title>", "reason": "<why this job fits>"},
-    {"title": "<job title>", "reason": "<why this job fits>"},
-    {"title": "<job title>", "reason": "<why this job fits>"},
-    {"title": "<job title>", "reason": "<why this job fits>"},
-    {"title": "<job title>", "reason": "<why this job fits>"}
+    {"title": "Job Title Here", "reason": "Reason here"},
+    {"title": "Job Title Here", "reason": "Reason here"},
+    {"title": "Job Title Here", "reason": "Reason here"}
   ]
 }
 Resume:
@@ -60,11 +58,21 @@ ${resumeText.substring(0, 4000)}`
 
     const data = await response.json();
     const raw = data.choices[0].message.content.trim();
-    const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) return res.status(500).json({ error: 'Could not parse AI response.' });
+console.log('Raw AI response:', raw);
 
-    const parsed = JSON.parse(match[0]);
-    res.json(parsed);
+const match = raw.match(/\{[\s\S]*\}/);
+if (!match) return res.status(500).json({ error: 'Could not parse AI response.' });
+
+let parsed;
+try {
+  parsed = JSON.parse(match[0]);
+} catch (parseErr) {
+  console.error('JSON parse error:', parseErr);
+  console.error('Raw content:', match[0]);
+  return res.status(500).json({ error: 'Could not parse AI response. Try again.' });
+}
+
+res.json(parsed);
 
   } catch (err) {
     console.error(err);
